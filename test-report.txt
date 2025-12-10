@@ -1,0 +1,44 @@
+?   	discountengine	[no test files]
+?   	discountengine/handlers	[no test files]
+?   	discountengine/internal/engine	[no test files]
+?   	discountengine/internal/models	[no test files]
+?   	discountengine/internal/utils	[no test files]
+=== RUN   TestDiscountEngine
+=== RUN   TestDiscountEngine/No_discount_-_small_order
+    discount_engine_test.go:76: Expected discount 0, got 2.5
+    discount_engine_test.go:79: Expected final total 0, got 2.5
+=== RUN   TestDiscountEngine/10%__discount_for_order_over_$100_
+=== RUN   TestDiscountEngine/15%_discount_for_premium_customer
+=== RUN   TestDiscountEngine/$20_fixed_discount_for_order_over_$200
+=== RUN   TestDiscountEngine/Premium_customer_with_$250_order_(multiple_rules)
+    discount_engine_test.go:76: Expected discount 37.5, got 20
+    discount_engine_test.go:79: Expected final total 37.5, got 20
+--- FAIL: TestDiscountEngine (0.00s)
+    --- FAIL: TestDiscountEngine/No_discount_-_small_order (0.00s)
+    --- PASS: TestDiscountEngine/10%__discount_for_order_over_$100_ (0.00s)
+    --- PASS: TestDiscountEngine/15%_discount_for_premium_customer (0.00s)
+    --- PASS: TestDiscountEngine/$20_fixed_discount_for_order_over_$200 (0.00s)
+    --- FAIL: TestDiscountEngine/Premium_customer_with_$250_order_(multiple_rules) (0.00s)
+=== RUN   TestRulePriority
+--- PASS: TestRulePriority (0.00s)
+=== RUN   TestConcurrentAccess
+--- FAIL: TestConcurrentAccess (0.00s)
+panic: failed to load discount rules: open ../config/rule.json: no such file or directory [recovered, repanicked]
+
+goroutine 11 [running]:
+testing.tRunner.func1.2({0x10092a3c0, 0x14000026590})
+	/usr/local/go/src/testing/testing.go:1872 +0x190
+testing.tRunner.func1()
+	/usr/local/go/src/testing/testing.go:1875 +0x31c
+panic({0x10092a3c0?, 0x14000026590?})
+	/usr/local/go/src/runtime/panic.go:783 +0x120
+discountengine/internal/engine.NewDiscountEngine({0x1008d7778, 0x13})
+	/Users/shahid/Documents/discountengne/internal/engine/discount_engine.go:23 +0xec
+discountengine/tests.TestConcurrentAccess(0x14000146380?)
+	/Users/shahid/Documents/discountengne/tests/discount_engine_test.go:111 +0x28
+testing.tRunner(0x14000146380, 0x10095e7e0)
+	/usr/local/go/src/testing/testing.go:1934 +0xc8
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1997 +0x364
+FAIL	discountengine/tests	0.582s
+FAIL
